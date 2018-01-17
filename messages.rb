@@ -10,12 +10,12 @@ class Messages
   class << self
     def start
       <<-TEXT
-      "Hello!\
-      This bot was remade to show some of my skills in Ruby to get some work.\
-      If you are interested in the result, start with the command '/help' to view all available commands.\
-      This bot will react at your commands. Be sure to type them down correctly.\
-      Everything after your command will be ignored (unless it's '/random' command).\
-      Good Luck!"
+      Hello!
+      This bot was remade to show some of my skills in Ruby to get some work.
+      If you are interested in the result, start with the command '/help' to view all available commands.
+      This bot will react at your commands. Be sure to type them down correctly.
+      Everything after your command will be ignored (unless it's '/random' command).
+      Good Luck!
       TEXT
     end
 
