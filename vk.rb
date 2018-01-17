@@ -5,7 +5,7 @@ class Vk
       response = RestClient.get("https://api.vk.com/method/photos.getAlbums?owner_id=#{ENV['USER_ID']}&access_token=#{ENV['VK_API_TOKEN']}")
 
       parsed = JSON.parse(response.body)['response']
-      parsed.each { |elem| @albums[elem['title']] = elem['aid'] } if !parsed.nil?
+      parsed.each { |elem| @albums[elem['title']] = elem['aid'] } unless parsed.nil?
 
       @albums
     end

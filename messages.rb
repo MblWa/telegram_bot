@@ -8,26 +8,28 @@ class Messages
                 '/source' => 'Show some code of this bot.' }
 
   class << self
-    def start(bot, message)
-      bot.api.sendMessage(chat_id: message.chat.id, text: "Hello, #{message.from.first_name}!
-        This bot was remade to show some of my skills in Ruby to get some work.
-        If you are interested in the result, start with the command '/help' to view all available commands.
-        This bot will react at your commands. Be sure to type them down correctly.
-        Everything after your command will be ignored (unless it's '/random' command).
-        Good Luck!")
+    def start
+      <<-TEXT
+      "Hello!\
+      This bot was remade to show some of my skills in Ruby to get some work.\
+      If you are interested in the result, start with the command '/help' to view all available commands.\
+      This bot will react at your commands. Be sure to type them down correctly.\
+      Everything after your command will be ignored (unless it's '/random' command).\
+      Good Luck!"
+      TEXT
     end
 
-    def help(bot, message)
+    def help
       mes = ''
       # Generating message string from available commands and descrip.
       @commands.each.with_index do |(com, descrip), i|
         mes << (i + 1).to_s << '. ' << com << ' - ' << descrip << "\n"
       end
 
-      bot.api.sendMessage(chat_id: message.chat.id, text: mes.chop)
+      mes.chop
     end
 
-    def list(bot, message)
+    def list
       mes = ''
       albums = Vk.albums_get
 
@@ -39,19 +41,19 @@ class Messages
         end
       end
 
-      bot.api.sendMessage(chat_id: message.chat.id, text: mes.chop)
+      mes.chop
     end
 
-    def random(bot, message, param = '')
-      bot.api.sendMessage(chat_id: message.chat.id, text: Vk.photos_get(param))
+    def random(param = '')
+      Vk.photos_get(param)
     end
 
-    def source(bot, message)
-      bot.api.sendMessage(chat_id: message.chat.id, text: Vk.source_get)
+    def source
+      Vk.source_get
     end
 
-    def other(bot, message)
-      bot.api.sendMessage(chat_id: message.chat.id, text: "Unknown command, for all available commands type '/help'")
+    def other
+      "Unknown command, for all available commands type '/help'"
     end
   end
 end
