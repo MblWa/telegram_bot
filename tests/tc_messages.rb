@@ -7,15 +7,15 @@ require_relative '../vk.rb'
 
 class TestMessages < Test::Unit::TestCase
   def test_start
-    assert_equal(true, Messages.start.is_a?(String), "Method start doesn't work.")
+    assert_equal(true, Messages.start.is_a?(String), "Method start doesn't return String.")
   end
 
   def test_help
-    assert_equal(true, Messages.help.is_a?(String), "Method help doesn't work.")
+    assert_equal(true, Messages.help.is_a?(String), "Method help doesn't return String.")
   end
 
   def test_list
-    assert_equal(true, Messages.list.is_a?(String), "Method list albums doesn't work.")
+    assert_equal(true, Messages.list.is_a?(String), "Method list doesn't return String.")
   end
 
   def test_random
@@ -29,10 +29,10 @@ class TestMessages < Test::Unit::TestCase
   end
 
   def test_source
-    assert_equal(true, Messages.source.is_a?(String), "Method source doesn't work.")
+    assert_equal(true, Messages.source.is_a?(String), "Method source doesn't return String.")
   end
 
   def test_other
-    assert_equal(true, Messages.other.is_a?(String), "Method other doesn't work.")
+    assert_equal(true, Messages.other.is_a?(String), "Method other doesn't return String.")
   end
 end

@@ -6,7 +6,7 @@ require 'json'
 
 class TestVk < Test::Unit::TestCase
   def test_albums
-    assert_equal(true, Vk.albums_get.is_a?(Hash), "Method albums_get doesn't work.")
+    assert_equal(true, Vk.albums_get.is_a?(Hash), "Method albums_get doesn't return Hash.")
   end
 
   def test_photos
@@ -16,6 +16,6 @@ class TestVk < Test::Unit::TestCase
   end
 
   def test_source
-    assert_equal(true, Vk.source_get.is_a?(String), "Method source_get doesn't work.")
+    assert_equal(true, Vk.source_get.is_a?(String), "Method source_get doesn't return String.")
   end
 end
