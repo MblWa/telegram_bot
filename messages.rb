@@ -35,8 +35,8 @@ class Messages
       if albums.empty?
         mes = 'Sorry, no albums in this group '
       else
-        albums.keys.each.with_index do |key, i|
-          mes << (i + 1).to_s << '. ' << key << "\n"
+        albums.each.with_index do |(key, value), i|
+          mes << (i + 1).to_s << '. ' << key << ' | Фотографий в альбоме: '<< value[1].to_s << "\n"
         end
       end
 

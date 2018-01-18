@@ -7,7 +7,7 @@ class Vk
       response = RestClient.get("https://api.vk.com/method/photos.getAlbums?owner_id=#{ENV['USER_ID']}&access_token=#{ENV['VK_API_TOKEN']}")
 
       parsed = JSON.parse(response.body)['response']
-      parsed.each { |elem| @albums[elem['title']] = elem['aid'] } unless parsed.nil?
+      parsed.each { |elem| @albums[elem['title']] = [elem['aid'], elem['size']] } unless parsed.nil?
 
       @albums
     end
@@ -18,7 +18,7 @@ class Vk
 
       a_id = (album == '' || !@albums.keys.include?(album) ? @albums.keys.sample : album)
 
-      response = RestClient.get("https://api.vk.com/method/photos.get?owner_id=#{ENV['USER_ID']}&album_id=#{@albums[a_id]}&access_token=#{ENV['VK_API_TOKEN']}")
+      response = RestClient.get("https://api.vk.com/method/photos.get?owner_id=#{ENV['USER_ID']}&album_id=#{@albums[a_id][0]}&access_token=#{ENV['VK_API_TOKEN']}")
       parsed = JSON.parse(response.body)['response']
 
       parsed.map { |photo| photo['src_big'] }.sample || 'No photos in that album, sorry!'
