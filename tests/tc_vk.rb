@@ -15,6 +15,12 @@ class TestVk < Test::Unit::TestCase
     assert_equal(true, Vk.photos_get('f;klgjf').is_a?(String), "Method photos_get doesn't work with wrong album name.")
   end
 
+  def test_all
+    assert_equal(true, Vk.all_get.is_a?(String), "Method all_get doesn't work without parameters.")
+    assert_equal(true, Vk.all_get('Easy').is_a?(String), "Method all_get doesn't work with correct album name.")
+    assert_equal(true, Vk.all_get('f;klgjf').is_a?(String), "Method all_get doesn't work with wrong album name.")
+  end
+
   def test_source
     assert_equal(true, Vk.source_get.is_a?(String), "Method source_get doesn't return String.")
   end

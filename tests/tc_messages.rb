@@ -28,6 +28,16 @@ class TestMessages < Test::Unit::TestCase
     assert_equal(true, Messages.random('Easy').is_a?(String), "Method random doesn't work with correct album name.")
   end
 
+  def test_all
+    assert_equal(true, Messages.all.is_a?(String), "Method all doesn't work without parameter.")
+
+    ['fkgjdf;kgj;fdkgjf;kg;f', 349758, 45984958.0, true, false, nil, Object].each do |x|
+      assert_equal(true, Messages.all(x).is_a?(String), "Method all doesn't work with wrong album name as #{x.class}.")
+    end
+
+    assert_equal(true, Messages.all('Easy').is_a?(String), "Method random doesn't work with correct album name.")
+  end
+
   def test_source
     assert_equal(true, Messages.source.is_a?(String), "Method source doesn't return String.")
   end
