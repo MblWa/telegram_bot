@@ -1,3 +1,4 @@
+# Tests for Messages class
 require 'test/unit'
 require 'rest-client'
 require 'dotenv/load'
@@ -21,7 +22,7 @@ class TestMessages < Test::Unit::TestCase
   def test_random
     assert_equal(true, Messages.random.is_a?(String), "Method random doesn't work without parameter.")
 
-    ['fkgjdf;kgj;fdkgjf;kg;f', 349758, 45984958.0, true, false, nil, Object].each do |x|
+    ['fkgjdf;kgj;fdkgjf;kg;f', 349_758, 45_984_958.0, true, false, nil, Object].each do |x|
       assert_equal(true, Messages.random(x).is_a?(String), "Method random doesn't work with wrong album name as #{x.class}.")
     end
 
@@ -31,11 +32,11 @@ class TestMessages < Test::Unit::TestCase
   def test_all
     assert_equal(true, Messages.all.is_a?(String), "Method all doesn't work without parameter.")
 
-    ['fkgjdf;kgj;fdkgjf;kg;f', 349758, 45984958.0, true, false, nil, Object].each do |x|
+    ['fkgjdf;kgj;fdkgjf;kg;f', 349758, 45_984_958.0, true, false, nil, Object].each do |x|
       assert_equal(true, Messages.all(x).is_a?(String), "Method all doesn't work with wrong album name as #{x.class}.")
     end
 
-    assert_equal(true, Messages.all('Easy').is_a?(String), "Method random doesn't work with correct album name.")
+    assert_equal(true, Messages.all('Easy').is_a?(String), "Method all doesn't work with correct album name.")
   end
 
   def test_source

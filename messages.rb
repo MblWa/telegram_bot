@@ -3,7 +3,8 @@ class Messages
   # Predefined commands in chat
   @commands = { '/start' => 'Greeting message;',
                 '/list' => 'Prints list of all albums in das_chat_boot-group available;',
-                '/random' => 'Shows you some random picture from random album, with the name of album as parameter after whitespace - shows one photo from exact album;',
+                '/random album_name (optional)' => 'Shows you some random picture from random album, with the name of album as parameter after whitespace - shows one photo from exact album;',
+                '/all album_name' => 'Shows you all links to the photos in the album;',
                 '/source' => 'Show some code of this bot.' }
 
   class << self
@@ -36,7 +37,7 @@ class Messages
         mes = 'Sorry, no albums in this group '
       else
         albums.each.with_index do |(key, value), i|
-          mes << (i + 1).to_s << '. ' << key << ' | Фотографий в альбоме: '<< value[1].to_s << "\n"
+          mes << (i + 1).to_s << '. ' << key << ' | Фотографий в альбоме: ' << value[1].to_s << "\n"
         end
       end
 
@@ -45,6 +46,10 @@ class Messages
 
     def random(param = '')
       Vk.photos_get(param)
+    end
+
+    def all(param = '')
+      Vk.all_get(param)
     end
 
     def source

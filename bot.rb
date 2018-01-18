@@ -29,6 +29,8 @@ Telegram::Bot::Client.run(ENV['TELEGRAM_TOKEN']) do |bot|
             Messages.source
           when '/random'
             Messages.random(param)
+          when '/all'
+            Messages.all(param)
           else
             Messages.other
           end

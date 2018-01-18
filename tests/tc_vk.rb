@@ -1,3 +1,4 @@
+# Tests for Vk class
 require_relative '../vk.rb'
 require 'test/unit'
 require 'rest-client'
