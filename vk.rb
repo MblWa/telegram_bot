@@ -1,3 +1,5 @@
+# This class is used to get information from VK.com api.
+# All methods are used in Messages class (messages.rb)
 class Vk
   @albums = {}
   class << self

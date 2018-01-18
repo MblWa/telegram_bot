@@ -1,5 +1,4 @@
-# This class is used to send messages to user in chat.
-# All methods are used in Vk class (vk.rb)
+# This class is used to form messages to send for user in chat.
 class Messages
   # Predefined commands in chat
   @commands = { '/start' => 'Greeting message;',
