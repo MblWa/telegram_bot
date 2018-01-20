@@ -35,7 +35,7 @@ Telegram::Bot::Client.run(ENV['TELEGRAM_TOKEN']) do |bot|
             else
               Messages.other
             end
-    rescue => error
+    rescue StandardError => error
       mes = error.to_s
     end
     bot.api.sendMessage(chat_id: message.chat.id, text: mes)
