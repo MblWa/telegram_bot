@@ -46,21 +46,19 @@ class Vk
     private
 
     def get(method_name, a_id = '')
-      head = "https://api.vk.com/method/"
+      head = 'https://api.vk.com/method/'
       tail = "&access_token=#{ENV['VK_API_TOKEN']}"
-      response = case method_name
-                  when 'albums'
-                    RestClient.get(head << "photos.getAlbums?owner_id=#{ENV['USER_ID']}" << tail)
-                  when 'photos'
-                    RestClient.get(head << "photos.get?owner_id=#{ENV['USER_ID']}&album_id=" << a_id << tail)
-                  when 'source'
-                    RestClient.get(head << "groups.getById?group_ids=#{ENV['USER_ID'].to_i.abs}&fields=description" << tail)
-                  end
-      if response.code == 200
-        parsed = JSON.parse(response.body)['response']
-      else
-        raise 'Error code: ' << response.code.to_s << "\n" << 'Vk.api seems to be down.'
-      end
+      rsp = case method_name
+            when 'albums'
+              RestClient.get(head << "photos.getAlbums?owner_id=#{ENV['USER_ID']}" << tail)
+            when 'photos'
+              RestClient.get(head << "photos.get?owner_id=#{ENV['USER_ID']}&album_id=" << a_id << tail)
+            when 'source'
+              RestClient.get(head << "groups.getById?group_ids=#{ENV['USER_ID'].to_i.abs}&fields=description" << tail)
+            end
+
+      return JSON.parse(rsp.body)['response'] if rsp.code == 200
+      raise 'Error code: ' << rsp.code.to_s << "\n" << 'Vk.api seems to be down.'
     end
   end
 end

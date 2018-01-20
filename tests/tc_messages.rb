@@ -1,11 +1,10 @@
-# Tests for Messages class
 require 'test/unit'
 require 'rest-client'
 require 'dotenv/load'
 require 'json'
 require_relative '../messages.rb'
 require_relative '../vk.rb'
-
+# Tests for Messages class
 class TestMessages < Test::Unit::TestCase
   def test_start
     assert_equal(true, Messages.start.is_a?(String), 'Method start should always return String.')

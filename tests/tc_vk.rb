@@ -1,10 +1,9 @@
-# Tests for Vk class
 require_relative '../vk.rb'
 require 'test/unit'
 require 'rest-client'
 require 'dotenv/load'
 require 'json'
-
+# Tests for Vk class
 class TestVk < Test::Unit::TestCase
   def test_albums
     assert_equal(true, Vk.albums_get.is_a?(Hash), 'Method albums_get should return Hash.')

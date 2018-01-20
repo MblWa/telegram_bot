@@ -11,7 +11,7 @@ require_relative './messages.rb'
 # For example USER_ID='-11111'
 # All constants are set in .env file.
 if [ENV['TELEGRAM_TOKEN'], ENV['USER_ID'], ENV['VK_API_TOKEN']].include?(nil)
-  token = ['TELEGRAM_TOKEN', 'USER_ID', 'VK_API_TOKEN'].select { |x| ENV[x].nil? }
+  token = %w[TELEGRAM_TOKEN USER_ID VK_API_TOKEN].select { |x| ENV[x].nil? }
   raise "Unable to work properly without #{token.join(', ')}. Set them in .env"
 end
 
