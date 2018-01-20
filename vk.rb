@@ -5,9 +5,8 @@ class Vk
   @photos = []
   class << self
     def albums_get
-      response = RestClient.get("https://api.vk.com/method/photos.getAlbums?owner_id=#{ENV['USER_ID']}&access_token=#{ENV['VK_API_TOKEN']}")
+      parsed = get('albums')
 
-      parsed = JSON.parse(response.body)['response']
       parsed.each { |elem| @albums[elem['title']] = [elem['aid'], elem['size']] } unless parsed.nil?
 
       @albums
@@ -18,9 +17,7 @@ class Vk
       return 'No albums in the group. Try to add some.' if @albums.empty?
 
       a_id = (album == '' || !@albums.keys.include?(album) ? @albums.keys.sample : album)
-
-      response = RestClient.get("https://api.vk.com/method/photos.get?owner_id=#{ENV['USER_ID']}&album_id=#{@albums[a_id][0]}&access_token=#{ENV['VK_API_TOKEN']}")
-      parsed = JSON.parse(response.body)['response']
+      parsed = get('photos', @albums[a_id][0].to_s)
       @photos = parsed.map { |photo| photo['src_big'] }
 
       @photos.sample || 'No photos in that album, sorry!'
@@ -28,6 +25,7 @@ class Vk
 
     def all_get(album = '')
       albums_get if @albums.empty?
+
       return 'No albums in the group. Try to add some.' if @albums.empty?
       return 'Sorry, there is no such album in the group' if album == '' || !@albums.keys.include?(album)
       photos_get(album)
@@ -36,12 +34,32 @@ class Vk
     end
 
     def source_get
-      response = RestClient.get("https://api.vk.com/method/groups.getById?group_ids=#{ENV['USER_ID'].to_i.abs}&fields=description&access_token=#{ENV['VK_API_TOKEN']}")
-      parsed = JSON.parse(response.body)['response']
+      parsed = get('source')
+
       if parsed.nil?
         'Sorry, no description in the group.'
       else
         parsed.first['description'].gsub('<br>', "\n")
+      end
+    end
+
+    private
+
+    def get(method_name, a_id = '')
+      head = "https://api.vk.com/method/"
+      tail = "&access_token=#{ENV['VK_API_TOKEN']}"
+      response = case method_name
+                  when 'albums'
+                    RestClient.get(head << "photos.getAlbums?owner_id=#{ENV['USER_ID']}" << tail)
+                  when 'photos'
+                    RestClient.get(head << "photos.get?owner_id=#{ENV['USER_ID']}&album_id=" << a_id << tail)
+                  when 'source'
+                    RestClient.get(head << "groups.getById?group_ids=#{ENV['USER_ID'].to_i.abs}&fields=description" << tail)
+                  end
+      if response.code == 200
+        parsed = JSON.parse(response.body)['response']
+      else
+        raise 'Error code: ' << response.code.to_s << "\n" << 'Vk.api seems to be down.'
       end
     end
   end

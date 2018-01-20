@@ -2,6 +2,7 @@
 class Messages
   # Predefined commands in chat
   @commands = { '/start' => 'Greeting message;',
+                '/help' => 'Prints this message.',
                 '/list' => 'Prints list of all albums in das_chat_boot-group available;',
                 '/random album_name (optional)' => 'Shows you some random picture from random album, with the name of album as parameter after whitespace - shows one photo from exact album;',
                 '/all album_name' => 'Shows you all links to the photos in the album;',
