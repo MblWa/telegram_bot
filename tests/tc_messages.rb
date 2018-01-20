@@ -23,7 +23,7 @@ class TestMessages < Test::Unit::TestCase
     assert_equal(true, Messages.random.is_a?(String), 'Method random should always return String even without parameter.')
 
     ['fkgjdf;kgj;fdkgjf;kg;f', 349_758, 45_984_958.0, true, false, nil, Object].each do |x|
-      assert_equal(true, Messages.random(x).is_a?(String), 'Method random should always return String even with wrong album name as #{x.class}.')
+      assert_equal(true, Messages.random(x).is_a?(String), "Method random should always return String even with wrong album name as #{x.class}.")
     end
 
     assert_equal(true, Messages.random('Easy').is_a?(String), 'Method random should always return String with correct album name.')
@@ -32,8 +32,8 @@ class TestMessages < Test::Unit::TestCase
   def test_all
     assert_equal(true, Messages.all.is_a?(String), 'Method all should always return String even without parameter.')
 
-    ['fkgjdf;kgj;fdkgjf;kg;f', 349758, 45_984_958.0, true, false, nil, Object].each do |x|
-      assert_equal(true, Messages.all(x).is_a?(String), 'Method all should always return String even with wrong album name as #{x.class}.')
+    ['fkgjdf;kgj;fdkgjf;kg;f', 349_758, 45_984_958.0, true, false, nil, Object].each do |x|
+      assert_equal(true, Messages.all(x).is_a?(String), "Method all should always return String even with wrong album name as #{x.class}.")
     end
 
     assert_equal(true, Messages.all('Easy').is_a?(String), 'Method all should always return String with correct album name.')
